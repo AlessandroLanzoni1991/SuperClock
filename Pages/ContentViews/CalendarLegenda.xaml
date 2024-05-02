@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SuperClock.Pages.ContentViews"
+             xmlns:text="clr-namespace:SuperClock.Resources.Texts"
+             x:DataType="local:CalendarLegenda"
+             x:Class="SuperClock.Pages.ContentViews.CalendarLegenda">
+
+    <Grid x:Name="MainGrid"
+          ColumnSpacing="10"
+          Margin="5,0"
+          ColumnDefinitions="*,*,*,*,*,*,*">
+
+        <Label Grid.Column="0"
+               FontFamily="RobotoBold"
+               TextColor="{StaticResource MainColor2}"
+               FontSize="12"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Text="{x:Static text:Texts.Day1}"/>
+
+        <Label Grid.Column="1"
+               TextColor="{StaticResource MainColor2}"
+               FontFamily="RobotoBold"
+               FontSize="12"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Text="{x:Static text:Texts.Day2}"/>
+
+        <Label Grid.Column="2"
+               TextColor="{StaticResource MainColor2}"
+               FontFamily="RobotoBold"
+               FontSize="12"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Text="{x:Static text:Texts.Day3}"/>
+
+        <Label Grid.Column="3"
+               TextColor="{StaticResource MainColor2}"
+               FontFamily="RobotoBold"
+               FontSize="12"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Text="{x:Static text:Texts.Day4}"/>
+
+        <Label Grid.Column="4"
+               TextColor="{StaticResource MainColor2}"
+               FontFamily="RobotoBold"
+               FontSize="12"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Text="{x:Static text:Texts.Day5}"/>
+
+        <Label Grid.Column="5"
+               TextColor="{StaticResource MainColor2}"
+                FontFamily="RobotoBold"
+               FontSize="12"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Text="{x:Static text:Texts.Day6}"/>
+
+        <Label Grid.Column="6"
+               TextColor="{StaticResource MainColor2}"
+               FontFamily="RobotoBold"
+               FontSize="12"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Text="{x:Static text:Texts.Day0}"/>
+
+    </Grid>
+
+
+
+</ContentView>

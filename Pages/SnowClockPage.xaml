@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SuperClock.Pages"
+             xmlns:icons="clr-namespace:SuperClock.Models"
+             xmlns:views="clr-namespace:SuperClock.Pages.ContentViews"
+             xmlns:models="clr-namespace:SuperClock.Models.UI"
+             xmlns:converters="clr-namespace:SuperClock.Helpers.Converters"
+             xmlns:text="clr-namespace:SuperClock.Resources.Texts"
+             x:DataType="local:SnowClockPage"
+             x:Class="SuperClock.Pages.SnowClockPage"
+             Shell.NavBarIsVisible="False">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IsDayOfTheMonthOpacityConverter x:Key="DayOfTheMonth"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+
+        <Image x:Name="Image1"
+               Source="background0"
+               Aspect="AspectFill"/>
+
+        <Image x:Name="Image2"
+               Aspect="AspectFill"
+               Source="background1"
+               Opacity="0"/>
+        
+        
+        <Grid BackgroundColor="#50000000"
+              RowDefinitions="Auto, Auto, *"
+              Padding="10">
+          
+            
+            <!--SNOW-->
+            <Grid x:Name="SnowGrid"/>
+
+            <!--BUTTONS-->
+            <HorizontalStackLayout VerticalOptions="Start"
+                                   HorizontalOptions="End"
+                                   Margin="0,30,0,0"
+                                   Spacing="20">
+
+                <Label x:Name="SnowLabel"
+                       Style="{StaticResource Label_Icon}"
+                       Text="{x:Static icons:Icons.Snowflake}"
+                       FontSize="25"
+                       TextColor="{StaticResource MainColor}">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="StartStopSnow"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="ChangeImageLabel"
+                       Style="{StaticResource Label_Icon}"
+                       Text="{x:Static icons:Icons.Image}"
+                       FontSize="25"
+                       TextColor="{StaticResource MainColor}">
+
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ChangeImage"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="ChangeColorLabel"
+                       Text="{x:Static icons:Icons.Droplet}"
+                       Style="{StaticResource Label_Icon}"
+                       FontSize="25"
+                       TextColor="{StaticResource MainColor}">
+
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ChangeColorsLabels"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            
+            </HorizontalStackLayout>
+
+            <!--TIME-->
+            <Grid RowDefinitions="*,*"
+                  ColumnDefinitions="*,*">
+
+                <Label x:Name="HourLabel"
+                       Grid.ColumnSpan="2"
+                       Text="04"
+                       FontSize="190"
+                       FontFamily="RobotoBold"
+                       TextColor="{StaticResource MainColor}"/>
+                
+                <Label x:Name="MinuteLabel"
+                       Text="10"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       Margin="0,-75,0,0"
+                       FontSize="190"
+                       FontFamily="RobotoBold"
+                       TextColor="{StaticResource MainColor}"
+                       HorizontalOptions="End"/>
+
+
+                <Border Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Margin="0,-30,25,0"
+                        BackgroundColor="#75FFFFFF"
+                        StrokeShape="RoundRectangle 100"
+                        Stroke="Transparent"
+                        Padding="25,15">
+
+
+                    <Grid RowDefinitions="Auto,Auto">
+
+                        <Label x:Name="DayNumber"
+                               HorizontalOptions="Center"
+                               FontFamily="RobotoBold"
+                               TextColor="White"
+                               FontSize="22"/>
+                        
+                        
+                        <Label x:Name="MonthName"
+                               Grid.Row="1"
+                               FontFamily="RobotoBold"
+                               FontSize="20"
+                               TextColor="White"/>
+
+                    </Grid>
+                    
+                </Border>
+
+            </Grid>
+
+
+             
+            <VerticalStackLayout Grid.Row="1"
+                                 Margin="0,-25,0,0">
+
+                <Label x:Name="OtherCitiesLabel"
+                       Text="Others cities"
+                       TextColor="{StaticResource MainColor}"
+                       FontAttributes="Bold"
+                       FontSize="17"/>
+                <CollectionView x:Name="PlacesCollections"
+                                ItemsSource="{Binding Cities}"
+                                VerticalScrollBarVisibility="Never">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"/>
+                    </CollectionView.ItemsLayout>
+                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:CityTimeModel">
+
+                            <Border Stroke="Transparent"
+                                    StrokeShape="RoundRectangle 15"
+                                    BackgroundColor="#99FFFFFF"
+                                    Margin="5">
+
+                                <Label x:Name="Lalalabel"
+                                       Text="{Binding City}"
+                                       Padding="20,15"
+                                       FontFamily="RobotoBold"
+                                       TextColor="{Binding Color}"
+                                       HorizontalOptions="Center">
+
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="PlaceLabelClicked"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Border>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+                
+            <Border Grid.Row="2"
+                    Stroke="Transparent"
+                    StrokeShape="RoundRectangle 15"
+                    BackgroundColor="#75FFFFFF"
+                    Margin="5,10,5,50">
+
+                <Grid RowDefinitions="Auto,Auto, *">
+
+                    <!--DAYS TITLE LABEL-->
+                    <Grid Margin="8,10">
+
+                        <!--PREVIUS MONTH-->
+                        <Label x:Name="PreviusMonthButt"
+                               Padding="8,5"
+                               Text="{x:Static icons:Icons.AnglesLeft}"
+                               TextColor="{StaticResource MainColor}"
+                               Style="{StaticResource Label_Icon}"
+                               FontSize="18"
+                               HorizontalOptions="Start">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoPreviusMonth"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <!--LABEL DATE-->
+                        <Label x:Name="LabelDate"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               FontFamily="RobotoMedium"
+                               TextColor="{StaticResource MainColor}"
+                               FontSize="16"/>
+
+                        <!--NEXT MONTH-->
+                        <Label x:Name="NextMonthButton"
+                               Text="{x:Static icons:Icons.AnglesRight}"
+                               Style="{StaticResource Label_Icon}"
+                               TextColor="{StaticResource MainColor}"
+                               Padding="8,5"
+                               FontSize="15"
+                               HorizontalOptions="End">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoNextMonth"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                    </Grid>
+
+                    <!--DAYS LEGENDA-->
+                    <Grid ColumnSpacing="10"
+                          Margin="5,10"
+                          Grid.Row="1"
+                          ColumnDefinitions="*,*,*,*,*,*,*">
+
+                        <Label x:Name="Day1"
+                               Grid.Column="0"
+                               FontFamily="RobotoBold"
+                               TextColor="{StaticResource MainColor2}"
+                               FontSize="12"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Text="{x:Static text:Texts.Day1}"/>
+
+                        <Label x:Name="Day2"
+                               Grid.Column="1"
+                               TextColor="{StaticResource MainColor2}"
+                               FontFamily="RobotoBold"
+                               FontSize="12"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Text="{x:Static text:Texts.Day2}"/>
+
+                        <Label x:Name="Day3"
+                               Grid.Column="2"
+                               TextColor="{StaticResource MainColor2}"
+                               FontFamily="RobotoBold"
+                               FontSize="12"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Text="{x:Static text:Texts.Day3}"/>
+
+                        <Label x:Name="Day4"
+                               Grid.Column="3"
+                               TextColor="{StaticResource MainColor2}"
+                               FontFamily="RobotoBold"
+                               FontSize="12"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Text="{x:Static text:Texts.Day4}"/>
+
+                        <Label x:Name="Day5"
+                               Grid.Column="4"
+                               TextColor="{StaticResource MainColor2}"
+                               FontFamily="RobotoBold"
+                               FontSize="12"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Text="{x:Static text:Texts.Day5}"/>
+
+                        <Label x:Name="Day6"
+                               Grid.Column="5"
+                               TextColor="{StaticResource MainColor2}"
+                                FontFamily="RobotoBold"
+                               FontSize="12"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Text="{x:Static text:Texts.Day6}"/>
+
+                        <Label x:Name="Day7"
+                               Grid.Column="6"
+                               TextColor="{StaticResource MainColor2}"
+                               FontFamily="RobotoBold"
+                               FontSize="12"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Text="{x:Static text:Texts.Day0}"/>
+
+                    </Grid>
+
+                    <!--CALENDAR-->
+                    <CollectionView x:Name="CalendarDays"
+                                    Grid.Row="2"
+                                    ItemsSource="{Binding Days}">
+
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                             VerticalItemSpacing="2"
+                                             HorizontalItemSpacing="2"
+                                             Span="7" />
+
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="icons:DayModel">
+
+                                <Grid HeightRequest="30">
+
+                                    <Label Padding="2"
+                                           Style="{StaticResource Label_VerySmall}"
+                                           Opacity="{Binding IsDayOfThisMonth, Converter={StaticResource DayOfTheMonth}}"
+                                           TextColor="{Binding Color}"
+                                           Text="{Binding DateTime.Day}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+
+                                </Grid>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+
+                </Grid>
+
+            </Border>
+            
+        </Grid>
+
+
+    </Grid>
+    
+    
+</ContentPage>

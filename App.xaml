@@ -1,0 +1,51 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SuperClock"
+             x:Class="SuperClock.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+
+            <Color x:Key="MainColor">White</Color>
+            <Color x:Key="MainColor2">Gainsboro</Color>
+            <Color x:Key="MainColor3">DimGray</Color>
+
+            <!--LABELS-->
+            <Style TargetType="Label" x:Key="Label_VerySmall">
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="CharacterSpacing" Value="1"/>
+                <Setter Property="FontFamily" Value="Light"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="Label_Small_Bold">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="CharacterSpacing" Value="1"/>
+                <Setter Property="FontFamily" Value="SemiBold"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="Label_Medium">
+                <Setter Property="FontSize" Value="26"/>
+                <Setter Property="CharacterSpacing" Value="1"/>
+                <Setter Property="FontFamily" Value="Medium"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="Label_Icon">
+                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontFamily" Value="FABrands"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

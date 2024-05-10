@@ -12,6 +12,7 @@ public partial class SnowClockPage
 
     #region Properties
 
+
     bool isDarkBackground;
 
     private ObservableCollection<DayModel> days;
@@ -46,14 +47,14 @@ public partial class SnowClockPage
     //Snow 
     public static bool IsSnowTime;
     private double gridWidth;
-    private int numberOfSnow = 500;
-    private List<SnowFlakeModel> images = [];
+    private int numberOfSnowflakes = 500;
+    private readonly List<SnowFlakeModel> images = [];
 
     private DateTime currentDate = DateTime.Now;
 
     private int currentColorCounter = 0;
-    List<string> coloriSfondoScuro = new List<string>
-    {
+    readonly List<string> darkBackgroundColors =
+    [
         "#FFFFFF",
         "#FFB6C1", // Rosa pastello
         "#00CED1", // Celeste pastello
@@ -75,9 +76,9 @@ public partial class SnowClockPage
         "#C0C0C0", // Lavanda pallida
         "#FFDAB9", // Pesca pastella
         "#FFB6C1"  // Rosa pallido
-    };
-    List<string> coloriSfondoBianco = new List<string>
-    {
+    ];
+    readonly List<string> lightBackgroundColors =
+    [
         "#FFFFFF",
         "#FFC0CB", // Rosa pastello
         "#87CEEB", // Celeste pastello
@@ -99,7 +100,7 @@ public partial class SnowClockPage
         "#D3D3D3", // Lavanda pallida
         "#FFE5B4", // Pesca pastella
         "#FFE4E1"  // Rosa pallido
-    };
+    ];
 
     #endregion
 
@@ -236,7 +237,49 @@ public partial class SnowClockPage
 
         RefreshTime();
     }
+    private void ChangeColorsLabels(object sender, TappedEventArgs e)
+    {
+        var list = isDarkBackground ? darkBackgroundColors : lightBackgroundColors;
 
+        currentColorCounter++;
+
+        if (currentColorCounter > list.Count - 1)
+            currentColorCounter = 0;
+
+
+        //Buttons
+        this.ChangeColorLabel.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.ChangeImageLabel.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.SnowLabel.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.HourLabel.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.MinuteLabel.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.OtherCitiesLabel.TextColor = Color.FromRgba(list[currentColorCounter]);
+
+        //Cities
+        this.PreviusMonthButt.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.LabelDate.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.NextMonthButton.TextColor = Color.FromRgba(list[currentColorCounter]);
+
+        //Legenda days
+        this.Day1.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.Day2.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.Day3.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.Day4.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.Day5.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.Day6.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.Day7.TextColor = Color.FromRgba(list[currentColorCounter]);
+
+        //Clock 
+        this.DayNumber.TextColor = Color.FromRgba(list[currentColorCounter]);
+        this.MonthName.TextColor = Color.FromRgba(list[currentColorCounter]);
+
+
+        foreach (var citie in this.Cities)
+            citie.Color = list[currentColorCounter];
+
+        foreach (var day in this.Days)
+            day.Color = list[currentColorCounter];
+    }
 
 
     //Effects
@@ -244,11 +287,8 @@ public partial class SnowClockPage
     {
         Random random = new Random();
 
-        // Genera 50 immagini
-        for (int i = 0; i < numberOfSnow; i++)
+        for (int i = 0; i < numberOfSnowflakes; i++)
         {
-            var r = new Random();
-
             var size = random.Next(10, 17);
             var imagenumber = random.Next(0, 4);
             var imageName = $"snowflake{imagenumber}";
@@ -259,8 +299,7 @@ public partial class SnowClockPage
                 HeightRequest = size,
                 VerticalOptions = LayoutOptions.Start,
                 TranslationY = -50,
-                TranslationX = random.Next((int)-gridWidth, (int)gridWidth),
-                StartingTranslationX = TranslationX
+                TranslationX = random.Next((int)-gridWidth, (int)gridWidth)
             });
         }
 
@@ -319,15 +358,12 @@ public partial class SnowClockPage
                 Task.WhenAll(t1,t2);
         }
 
-        imageCounter++;
+        this.imageCounter++;
 
         if(imageCounter == 11)
             imageCounter = 0;
 
-        if(imageCounter >= 5)
-            isDarkBackground = true;
-        else
-            isDarkBackground= false;
+        this.isDarkBackground = imageCounter >= 5;
     }
 
     #endregion
@@ -371,50 +407,4 @@ public partial class SnowClockPage
 
     #endregion
 
-    private void ChangeColorsLabels(object sender, TappedEventArgs e)
-    {
-        var list = isDarkBackground ? coloriSfondoScuro : coloriSfondoBianco;
-
-        currentColorCounter++;
-
-        if(currentColorCounter > list.Count - 1)
-            currentColorCounter = 0;
-
-
-        //Buttons
-        this.ChangeColorLabel.TextColor = Color.FromRgba(list[currentColorCounter]);
-        this.ChangeImageLabel.TextColor = Color.FromRgba(list[currentColorCounter]);
-        this.SnowLabel.TextColor = Color.FromRgba(list[currentColorCounter]);
-        
-        this.HourLabel.TextColor = Color.FromRgba(list[currentColorCounter]);
-        this.MinuteLabel.TextColor = Color.FromRgba(list[currentColorCounter]);
-
-        this.OtherCitiesLabel.TextColor = Color.FromRgba(list[currentColorCounter]);
-
-
-        //Lista delle citta
-        this.PreviusMonthButt.TextColor = Color.FromRgba(list[currentColorCounter]);
-        this.LabelDate.TextColor = Color.FromRgba(list[currentColorCounter]);
-        this.NextMonthButton.TextColor = Color.FromRgba(list[currentColorCounter]);
-
-        //Legenda days
-        this.Day1.TextColor = Color.FromRgba(list[currentColorCounter]);
-        this.Day2.TextColor = Color.FromRgba(list[currentColorCounter]);
-        this.Day3.TextColor = Color.FromRgba(list[currentColorCounter]);
-        this.Day4.TextColor = Color.FromRgba(list[currentColorCounter]);
-        this.Day5.TextColor = Color.FromRgba(list[currentColorCounter]);
-        this.Day6.TextColor = Color.FromRgba(list[currentColorCounter]);
-        this.Day7.TextColor = Color.FromRgba(list[currentColorCounter]);
-
-        this.DayNumber.TextColor = Color.FromRgba(list[currentColorCounter]);
-        this.MonthName.TextColor = Color.FromRgba(list[currentColorCounter]);
-
-
-        foreach (var citie in this.Cities)
-            citie.Color = list[currentColorCounter];
-
-
-        foreach(var day in this.Days)
-            day.Color = list[currentColorCounter];
-    }
 }

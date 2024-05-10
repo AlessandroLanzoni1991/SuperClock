@@ -104,9 +104,6 @@
 	  <MauiXaml Update="Pages\ContentViews\CalendarLegenda.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\NewPage1.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Pages\SnowClockPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

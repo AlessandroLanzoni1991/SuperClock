@@ -6,7 +6,6 @@
         #region Properties
 
         public bool IsAnimating { get; set; }
-        public double StartingTranslationX { get; set; }
 
         #endregion
 
@@ -35,5 +34,6 @@
         }
 
         #endregion
+
     }
 }

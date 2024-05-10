@@ -27,6 +27,7 @@ namespace SuperClock.Models
 
         #endregion
 
+
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -38,6 +39,7 @@ namespace SuperClock.Models
 
         #endregion
 
+
         #region Constructor
 
         public DayModel()
@@ -45,5 +47,6 @@ namespace SuperClock.Models
         }
 
         #endregion
+
     }
 }

@@ -28,13 +28,13 @@
                Aspect="AspectFill"
                Source="background1"
                Opacity="0"/>
-        
-        
+
+
         <Grid BackgroundColor="#50000000"
               RowDefinitions="Auto, Auto, *"
               Padding="10">
-          
-            
+
+
             <!--SNOW-->
             <Grid x:Name="SnowGrid"/>
 
@@ -78,7 +78,7 @@
                         <TapGestureRecognizer Tapped="ChangeColorsLabels"/>
                     </Label.GestureRecognizers>
                 </Label>
-            
+
             </HorizontalStackLayout>
 
             <!--TIME-->
@@ -91,7 +91,7 @@
                        FontSize="190"
                        FontFamily="RobotoBold"
                        TextColor="{StaticResource MainColor}"/>
-                
+
                 <Label x:Name="MinuteLabel"
                        Text="10"
                        Grid.Row="1"
@@ -121,8 +121,8 @@
                                FontFamily="RobotoBold"
                                TextColor="White"
                                FontSize="22"/>
-                        
-                        
+
+
                         <Label x:Name="MonthName"
                                Grid.Row="1"
                                FontFamily="RobotoBold"
@@ -130,13 +130,13 @@
                                TextColor="White"/>
 
                     </Grid>
-                    
+
                 </Border>
 
             </Grid>
 
 
-             
+            <!--CITIES-->
             <VerticalStackLayout Grid.Row="1"
                                  Margin="0,-25,0,0">
 
@@ -152,7 +152,7 @@
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal"/>
                     </CollectionView.ItemsLayout>
-                    
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:CityTimeModel">
 
@@ -179,7 +179,7 @@
                 </CollectionView>
             </VerticalStackLayout>
 
-                
+            <!--CALENDAR-->
             <Border Grid.Row="2"
                     Stroke="Transparent"
                     StrokeShape="RoundRectangle 15"
@@ -334,13 +334,9 @@
                     </CollectionView>
 
                 </Grid>
-
             </Border>
-            
+
         </Grid>
-
-
     </Grid>
-    
-    
+
 </ContentPage>

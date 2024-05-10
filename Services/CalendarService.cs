@@ -26,7 +26,6 @@ namespace SuperClock.Services
                 monthModel.SetForCalendar();
 
             var daysObservable = new ObservableCollection<DayModel>();
-
             foreach(var day in monthModel.Days)
                 daysObservable.Add(day);
 

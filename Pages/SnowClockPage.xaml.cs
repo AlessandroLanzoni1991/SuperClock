@@ -47,7 +47,7 @@ public partial class SnowClockPage
     //Snow 
     public static bool IsSnowTime;
     private double gridWidth;
-    private int numberOfSnowflakes = 500;
+    private int numberOfSnowflakes = 180;
     private readonly List<SnowFlakeModel> images = [];
 
     private DateTime currentDate = DateTime.Now;
